@@ -18,7 +18,7 @@ services:
       start_period: 30s
   api:
     container_name: api-container
-    build: 
+    build:
       context: ./backend
       cache_to: 
         - type=local,dest=/tmp/.buildx-cache/api,mode=max
