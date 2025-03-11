@@ -13,6 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4.2.2
 
+      # 디스코드로 메세지 전송 (Channel 1)
+      - name: Start Message (Channel 1)
+        # 라이브러리 개발자/라이브러리 이름@버전
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: ⭐Start Deploy⭐
+          color: 0xF09B59
+
       - name: run ssh-agent, webfactory/ssh-agent
         uses: webfactory/ssh-agent@v0.9.0
         with:
@@ -23,7 +32,7 @@ jobs:
         run: ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts || true
 
       - name: Create .env file
-        run: echo """${{ secrets.ENV_FILE }}""" >> .env
+        run: echo "${{ secrets.ENV_FILE }}" >> .env
 
       # 캐시 저장 설정을 위한 actions(라이브러리)
       - name: Set up Cache Repo
@@ -82,3 +91,29 @@ jobs:
             docker compose down
             docker compose up -d
             docker system prune -f
+
+      # Discord 알림 - 배포 성공
+      - name: Discord Notification - Success
+        if: success()
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "🌞 Success Deploy 🌞"
+          description: |
+            Repository: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.event.head_commit.message }}
+          color: 0x75F94D
+
+      # Discord 알림 - 배포 실패
+      - name: Discord Notification - Failure
+        if: failure()
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "😭 Failure Deploy 😭"
+          description: |
+            Repository: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.event.head_commit.message }}
+          color: 0xEA3680
