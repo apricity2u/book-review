@@ -22,7 +22,7 @@ services:
         - type=local,dest=/tmp/.buildx-cache/api,mode=max
       cache_from: 
         - type=local,src=/tmp/.buildx-cache/api
-    image: cloakingghost/book-backend:test
+    image: ${DOCKER_REGISTRY}/book-backend:test
     env_file:
       - .env.development.local
     networks:
@@ -42,7 +42,7 @@ services:
         - type=local,dest=/tmp/.buildx-cache/client,mode=max
       cache_from: 
         - type=local,src=/tmp/.buildx-cache/client
-    image: cloakingghost/book-front:test
+    image: ${DOCKER_REGISTRY}/book-front:test
     env_file:
       - .env.development.local
     ports:
