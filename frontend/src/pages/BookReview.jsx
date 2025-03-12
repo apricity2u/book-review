@@ -99,9 +99,9 @@ export default function BookReview() {
    * @param {React.ChangeEvent<HTMLInputElement>} e - 파일 입력의 변경 이벤트.
    */
   const addImage = (e) => {
-    const addImage = e.target.files[0];
+    const addImage = e.target.files;
     setBookImageFile(addImage);
-    setBookImage(URL.createObjectURL(addImage));
+    setBookImage(URL.createObjectURL(addImage[0]));
   };
 
   /**
