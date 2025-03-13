@@ -363,3 +363,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+
+### Python ###
+venv/
+__pycache__/
