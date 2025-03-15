@@ -3,7 +3,7 @@ from db import execute_query
 
 print("Start Scraping")
 for c in range(ord("가"), ord("힣") + 1):
-    result = fetch_api(query=c)
+    result = fetch_api(query=chr(c))
 
     for dict in result:
         books, images = dict["books"], dict["images"]
