@@ -9,7 +9,7 @@
 ### a. 프로젝트 소개
 
 - 주제 : 카드 기반 감상문 공유 프로젝트
-- 도메인 : https://52.79.239.17.sslip.io/
+- 도메인 : https://52.79.239.17.sslip.io/ (현재 중단)
 - 개발기간 : 2025.02.19~2025.03.06 (약 2주)
 - 개발인원 : 4인
 
@@ -115,41 +115,10 @@
     ```bash
     docker compose -f docker-compose-local.yml up --build
     ```
-    
-
-### 배포
-
-- `Github.com/repository → settings → Secrets and variables → Actions → New repository secret`
-    - `.env.example` 에 있는 환경 변수 등록
-- 푸쉬 감지 후 깃허브 액션에서 `deploy.yml` 실행
-
-> [프로젝트 환경 구축 상세](document/readme-file/deploy.md)
-
-## 📡 API 명세
-
-- API 문서: [Notion 링크](https://www.notion.so/1afe41ab207980c79817efa42f101f3d?pvs=21)
-- 분류 : 회원, 감상문, 도서, 이미지
-- 개수 : 15개
 
 ## 📜 ERD
 
 ![erd.png](document/readme-file/erd-drawio.png)
-
-## 📂 프로젝트 구조
-
-```bash
-📦book-review
- ┣ 📂.github                    # Github Actions 워크플로우
- ┣ 📂.husky                     # git commit 설정
- ┣ 📂document                   # ERD, Wire Frame
- ┣ 📂frontend                   # React
- ┣ 📂backend                    # Spring Boot
- ┣ 📂scrap                      # 책 정보 수집(Python)
- ┣ 📜.env                       # 배포용 환경변수
- ┣ 📜docker-compose.yml         # 배포용 Nginx, Spring Boot, MySQL 이미지 실행
- ┣ 📜.env.development.local     # 로컬용 환경변수
- ┗ 📜docker-compose-local.yml   # 로컬용 Nginx, Spring Boot, MySQL 이미지 실행
-```
 
 ## 👥 팀 소개
 
